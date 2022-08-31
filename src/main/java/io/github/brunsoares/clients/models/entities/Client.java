@@ -1,0 +1,36 @@
+package io.github.brunsoares.clients.models.entities;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Client {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(nullable = false, length = 150)
+    private String name;
+
+    @Column(nullable = false, length = 11)
+    private String cpf;
+
+    @Column(name = "register_date", updatable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate registerDate;
+
+    @PrePersist
+    public void prePersist(){
+        setRegisterDate(LocalDate.now());
+    }
+}
