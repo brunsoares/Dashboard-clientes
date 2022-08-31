@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -28,6 +31,11 @@ public class Client {
     @Column(name = "register_date", updatable = false)
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate registerDate;
+
+    public Client(String name, String cpf){
+        this.name = name;
+        this.cpf = cpf;
+    }
 
     @PrePersist
     public void prePersist(){
