@@ -1,0 +1,49 @@
+<h1 class="mt-4">Clientes</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Cadastro</li>
+</ol>
+<div class="container">
+    <form>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>ID:</label>
+                    <input type="text" class="form-control" disabled>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>DATA CADASTRO:</label>
+                    <input type="text" class="form-control" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>NOME: *</label>
+                    <input type="text" class="form-control" maxlength="150">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>CPF: *</label>
+                    <input type="text" class="form-control"
+                        maxlength="11"
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-save"></i>
+                    SALVAR
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
