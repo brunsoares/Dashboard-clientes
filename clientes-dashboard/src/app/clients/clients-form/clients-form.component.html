@@ -3,19 +3,19 @@
     <li class="breadcrumb-item active">Cadastro</li>
 </ol>
 <div class="container">
-    <form>
+    <form #clientForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     <label>ID:</label>
-                    <input type="text" class="form-control" disabled>
+                    <input type="text" class="form-control" [ngModel]="client.id"name="id" disabled>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
                     <label>DATA CADASTRO:</label>
-                    <input type="text" class="form-control" disabled>
+                    <input type="text" class="form-control" [ngModel]="client.registerDate" name="registerDate" disabled>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>NOME: *</label>
-                    <input type="text" class="form-control" maxlength="150">
+                    <input type="text" class="form-control" maxlength="150" [(ngModel)]="client.name" name="name">
                 </div>
             </div>
             <div class="col-md-6">
@@ -32,7 +32,8 @@
                     <label>CPF: *</label>
                     <input type="text" class="form-control"
                         maxlength="11"
-                        onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                        [(ngModel)]="client.cpf" name="cpf">
                 </div>
             </div>
         </div>
