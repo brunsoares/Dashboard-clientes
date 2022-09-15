@@ -12,11 +12,12 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/clients")
+@CrossOrigin("http://localhost:4200")
 public class ClientController {
 
     private final ClientRepository clientRepository;
     
-    private static final String MENSAGEM_ERRO = "Cliente não encontrado!";
+    private static final String ERROR_MESSAGE = "Cliente não encontrado!";
 
     @Autowired
     public ClientController(ClientRepository clientRepository){
@@ -32,7 +33,7 @@ public class ClientController {
 
     @GetMapping("{id}")
     public Client findClientForId( @PathVariable Integer id){
-        return clientRepository.findById(id).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, MENSAGEM_ERRO));
+        return clientRepository.findById(id).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, ERROR_MESSAGE));
     }
 
     @DeleteMapping("{id}")
@@ -43,7 +44,7 @@ public class ClientController {
                     clientRepository.delete(client);
                     return Void.TYPE;
                 })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, MENSAGEM_ERRO));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, ERROR_MESSAGE));
     }
 
     @PatchMapping("{id}")
@@ -55,7 +56,7 @@ public class ClientController {
                             clientUpdated.setId(clientOld.getId());
                             return clientRepository.save(clientUpdated);
                         })
-                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, MENSAGEM_ERRO));
+                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, ERROR_MESSAGE));
     }
 
 }
