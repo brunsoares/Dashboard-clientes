@@ -3,9 +3,21 @@
     <li class="breadcrumb-item active">Consulta</li>
 </ol>
 <div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success" role="alert" *ngIf="successMessage">
+                {{ successMessage }}
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+                {{ errorMessage }}
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12 ">
-            <button class="btn btn-info float-right">
+            <button class="btn btn-info float-right" (click)="newRegister()">
                 <i class="fa fa-plus"></i> Novo
             </button>
         </div>
@@ -29,10 +41,40 @@
                         <td>{{ client.name }}</td>
                         <td>{{ client.cpf }}</td>
                         <td>{{ client.registerDate }}</td>
-                        <td></td>
+                        <td>
+                            <button class="btn btn-info" routerLink="/client/{{ client.id }}">
+                                <i class="fa fa-pen"></i>
+                            </button>
+                            <button class="btn btn-danger ml-2" (click)="prepareDeletion(client)"
+                                    data-toggle="modal" data-target="#modalDelete">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+
+    <div id="modalDelete" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Deletar cliente</h4>
+                </div>
+                <div class="modal-body" *ngIf="selectedClient">
+                    Deseja deletar o(a) cliente {{ selectedClient.name }}?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" (click)="deleteClient()" data-dismiss="modal">
+                        Confirmar
+                    </button>
+                    <button class="btn btn-danger ml-2" data-dismiss="modal">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
