@@ -4,12 +4,24 @@
 </ol>
 <div class="container">
     <form #form="ngForm" (submit)="onSubmit()">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert" *ngIf="success == true">
+                    Serviço prestado salvo com sucesso!
+                </div>
+                <div class="alert alert-danger" role="alert" *ngFor="let error of errors">
+                    {{error}}
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Cliente: </label>
                     <select class="form-control" 
-                            [ngModelOptions]="{standalone: true}" [(ngModel)]="service.clientID">
+                            [ngModelOptions]="{standalone: true}" [(ngModel)]="serviceModel.clientID">
                         <option value="">Selecione...</option>
                         <option *ngFor="let client of clients" [ngValue]="client.id">
                             {{ client.name }}
@@ -23,7 +35,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Descrição:</label>
-                    <input class="form-control" type="text" name="description" [(ngModel)]="service.description">
+                    <input class="form-control" type="text" name="description" [(ngModel)]="serviceModel.description">
                 </div>
             </div>
         </div>
@@ -32,14 +44,16 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Valor do Serviço:</label>
-                    <input class="form-control" type="text" name="price" [(ngModel)]="service.price">
+                    <input class="form-control" type="text" name="price" 
+                            onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                            [(ngModel)]="serviceModel.price">
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Data</label>
-                    <input class="form-control" type="text" name="date" [(ngModel)]="service.date">
+                    <input class="form-control" type="text" name="date" [(ngModel)]="serviceModel.date">
                 </div>
             </div>
         </div>

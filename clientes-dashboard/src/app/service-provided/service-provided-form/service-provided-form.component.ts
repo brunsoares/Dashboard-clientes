@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from 'src/app/clients/clients';
 import { ClientService } from '../../client.service';
 import { ServiceProvided } from '../service-provided';
+import { ServiceProvidedService } from 'src/app/service-provided.service';
 
 @Component({
   selector: 'app-service-provided-form',
@@ -11,12 +12,15 @@ import { ServiceProvided } from '../service-provided';
 export class ServiceProvidedFormComponent implements OnInit {
 
   clients: Client[] = [];
-  service: ServiceProvided;
+  serviceModel: ServiceProvided;
+  success: boolean = false;
+  errors: String[];
 
   constructor(
-    private clientService: ClientService
+    private clientService: ClientService,
+    private service: ServiceProvidedService
   ) {
-    this.service = new ServiceProvided();
+    this.serviceModel = new ServiceProvided();
    }
 
   ngOnInit(): void {
@@ -25,7 +29,16 @@ export class ServiceProvidedFormComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.service);
+    this.service.save(this.serviceModel)
+                .subscribe( response => {
+                  this.success = true;
+                  this.errors = String[""];
+                  this.serviceModel = new ServiceProvided();
+                },
+                  errorResponse => {
+                    this.success = false;
+                    this.errors = errorResponse.error.errors;
+                });
   
   }
 }
