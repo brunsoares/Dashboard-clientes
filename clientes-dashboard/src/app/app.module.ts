@@ -10,18 +10,20 @@ import { HomeComponent } from './home/home.component';
 import { ClientsModule } from './clients/clients.module';
 
 import { ClientService } from './client.service';
+import { ServiceProvidedModule } from './service-provided/service-provided.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     TemplateModule,
-    ClientsModule
+    ClientsModule,
+    ServiceProvidedModule
   ],
   providers: [
     ClientService
