@@ -1,5 +1,6 @@
 package io.github.brunsoares.clients.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -27,5 +29,9 @@ public class Service {
 
     @Column(columnDefinition = "decimal(19,2)")
     private BigDecimal amount;
+
+    @Column
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate dateService;
 
 }
