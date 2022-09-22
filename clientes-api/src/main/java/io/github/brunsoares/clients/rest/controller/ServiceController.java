@@ -10,10 +10,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/servicos-prestados")
+@RequestMapping("/api/services-provided")
 @RequiredArgsConstructor
 public class ServiceController {
 
@@ -22,7 +23,7 @@ public class ServiceController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Service saveService(@RequestBody ServiceDTO serviceDTO){
+    public Service saveService(@RequestBody @Valid ServiceDTO serviceDTO){
         Client client = clientRepository
                             .findById(serviceDTO.getClientID())
                             .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cliente não cadastrado!"));
@@ -37,8 +38,8 @@ public class ServiceController {
     }
 
     @GetMapping
-    public List<Service> findService(@RequestParam(value = "nome", required = false, defaultValue = "") String name,
-                                     @RequestParam(value = "mes", required = false) Integer month){
+    public List<Service> findService(@RequestParam(value = "name", required = false, defaultValue = "") String name,
+                                     @RequestParam(value = "month", required = false) Integer month){
         return repository.findByClientNameAndMonth("%"+name+"%", month);
     }
 
