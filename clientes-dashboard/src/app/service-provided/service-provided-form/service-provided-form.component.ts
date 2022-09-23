@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'
 import { Client } from 'src/app/clients/clients';
 import { ClientService } from '../../client.service';
 import { ServiceProvided } from '../service-provided';
@@ -18,7 +19,8 @@ export class ServiceProvidedFormComponent implements OnInit {
 
   constructor(
     private clientService: ClientService,
-    private service: ServiceProvidedService
+    private service: ServiceProvidedService,
+    private router: Router
   ) {
     this.serviceModel = new ServiceProvided();
    }
@@ -40,5 +42,9 @@ export class ServiceProvidedFormComponent implements OnInit {
                     this.errors = errorResponse.error.errors;
                 });
   
+  }
+
+  returnListServices(){
+    this.router.navigate(['/list-service-provided']);
   }
 }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'
+import { ServiceProvidedSearch } from './service-provided-search';
+import { ServiceProvidedService } from 'src/app/service-provided.service';
 
 @Component({
   selector: 'app-list-service-provided',
@@ -11,8 +14,13 @@ export class ListServiceProvidedComponent implements OnInit {
   month: number;
   months: number[];
   monthDescribed: String;
+  listServiceProvided: ServiceProvidedSearch[];
+  message: string;
 
-  constructor() { 
+  constructor(
+    private service: ServiceProvidedService,
+    private router: Router
+    ) { 
     this.months = [1,2,3,4,5,6,7,8,9,10,11,12];
   }
 
@@ -20,7 +28,15 @@ export class ListServiceProvidedComponent implements OnInit {
   }
 
   onSubmit(){
-
+    this.service.getServicesProvided(this.name, this.month)
+                .subscribe( response => {
+                  this.listServiceProvided = response
+                  if(this.listServiceProvided.length <= 0){
+                    this.message = "Nenhum registro encontrado!";
+                  } else {
+                    this.message = null;
+                  }
+                });
   }
   
   setMonthDescribed(mouthNumber: number){
@@ -65,6 +81,10 @@ export class ListServiceProvidedComponent implements OnInit {
         this.monthDescribed = "";
         break;
     }
+  }
+
+  newRegister(){
+    this.router.navigate(['/service-provided']);
   }
 
 }

@@ -1,6 +1,6 @@
 <h1 class="mt-4">Serviço Prestado</h1>
 <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active">Cadastrar</li>
+    <li class="breadcrumb-item active">Cadastro</li>
 </ol>
 <div class="container">
     <form #form="ngForm" (submit)="onSubmit()">
@@ -59,10 +59,15 @@
         </div>
             
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-12">
                 <button type="submit" class="btn btn-success">
                     <i class="fa fa-save"></i>
                     Salvar
+                </button>
+
+                <button class="btn btn-info ml-2" (click)="returnListServices()">
+                    <i class="fa fa-undo-alt"></i>
+                    Voltar
                 </button>
             </div>
         </div>

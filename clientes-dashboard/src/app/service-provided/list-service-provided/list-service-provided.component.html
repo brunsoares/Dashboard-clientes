@@ -6,12 +6,12 @@
     <form #consultaForm="ngForm" (submit)="onSubmit()">
         <div class="row">
             <div class="col-md-6">
-                <label for="inputName">Nome do Cliente:</label>
+                <label >Nome do Cliente:</label>
                 <input type="text" [(ngModel)]="name" class="form-control" name="name">
             </div>
 
             <div class="col-md-6">
-                <label for="inputMonth">Mês:</label>
+                <label >Mês:</label>
                 <select [(ngModel)]="month" class="form-control" name="selectMonth">
                     <option value="">Selecione...</option>
                     <option *ngFor="let month of months " [value]="month">
@@ -23,12 +23,45 @@
         </div>
         <br/>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-12">
                 <button type="submit" class="btn btn-info">
                     <i class="fa fa-search"></i>
                     Consultar
                 </button>
-            </div>
+
+                <button class="btn btn-info float-right" (click)="newRegister()">
+                    <i class="fa fa-plus"></i> Novo
+                </button>
+            </div>    
         </div>
     </form>
+    <br/>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-warning" role="alert" *ngIf="message">
+                {{ message }}
+            </div>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let service of listServiceProvided">
+                        <td>{{ service.client.name }}</td>
+                        <td>{{ service.description }}</td>
+                        <td>R${{ service.amount }}</td>
+                        <td>{{ service.dateService }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
