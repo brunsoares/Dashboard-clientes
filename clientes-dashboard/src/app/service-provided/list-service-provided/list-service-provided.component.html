@@ -14,7 +14,10 @@
                 <label for="inputMonth">Mês:</label>
                 <select [(ngModel)]="month" class="form-control" name="selectMonth">
                     <option value="">Selecione...</option>
-                    <option *ngFor="let month of months " [value]="month">{{ month }}</option>
+                    <option *ngFor="let month of months " [value]="month">
+                        {{ setMonthDescribed(month) }}
+                        {{ month }} - {{ monthDescribed }} 
+                    </option>
                 </select>
             </div>
         </div>
