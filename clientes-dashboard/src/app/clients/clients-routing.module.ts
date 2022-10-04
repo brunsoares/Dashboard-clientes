@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LayoutComponent } from '../layout/layout.component';
 
 import { ClientsFormComponent } from './clients-form/clients-form.component';
 import { ListClientsComponent } from './list-clients/list-clients.component';
 
 
 const routes: Routes = [
-  { path: 'client', component:ClientsFormComponent },
-  { path: 'client/:id', component:ClientsFormComponent },
-  { path: 'list-clients', component:ListClientsComponent}
+  { path: '', component:LayoutComponent, children: [
+    { path: 'client', component:ClientsFormComponent },
+    { path: 'client/:id', component:ClientsFormComponent },
+    { path: 'list-clients', component:ListClientsComponent}
+  ]}
+
 ];
 
 @NgModule({

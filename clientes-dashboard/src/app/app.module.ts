@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,13 +13,18 @@ import { ClientsModule } from './clients/clients.module';
 import { ClientService } from './client.service';
 import { ServiceProvidedModule } from './service-provided/service-provided.module';
 import { ServiceProvidedService } from './service-provided.service';
+import { LoginComponent } from './login/login.component';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    LoginComponent,
+    LayoutComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
